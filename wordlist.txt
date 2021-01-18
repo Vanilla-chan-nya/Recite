@@ -1,0 +1,7 @@
+2
+基本解释
+base.txt
+内置词库
+words.txt
+
+
