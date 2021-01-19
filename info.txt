@@ -5,21 +5,21 @@ defeat
 diet
 firm
 maple
+orphan
 relay
 reserve
 threaten
 habitat
-orphan
-20
-apology 52
-application 5
+21
+apology 54
+application 6
 confirm 3.8
-defeat 7
-diet 22
-enemy 5
-firm 6
-impress 17
-impression 11
+defeat 12
+diet 28
+enemy 6
+firm 7
+impress 18
+impression 12
 impressive 7.4
 maple 31
 relay 8
@@ -27,7 +27,8 @@ reserve 4
 threat 3
 threaten 7
 zone 5
-habitat 4
+habitat 9
+coconut 1
 taboo 3
-impressed 7.8
-impressively 1
+impressed 8.8
+impressively 3
