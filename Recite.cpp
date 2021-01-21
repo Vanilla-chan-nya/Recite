@@ -317,9 +317,11 @@ void read_info()
 		star.insert(pos);
 	}
 	fin>>sze;
+	cout<<"size="<<sze<<endl;
 	for(int i=0;i<sze;i++)
 	{
 		fin>>str;
+//		cout<<str<<endl;
 		fin>>dt;
 		pos=find(str);
 		if(pos==-1)
