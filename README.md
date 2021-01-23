@@ -91,6 +91,16 @@ $$
 
 
 
+## web translation
+
+按`2`进入 **联网翻译**。
+
+此功能需要百度翻译api支撑。
+
+请到百度开发者页面中认证，并在 `baidu-api.py` 中手动填写APPID和key。
+
+**切忌把自己的APPID和key告诉别人！！！**
+
 ## **Mutual encouragement**
 
 **愿共勉之。**
