@@ -94,7 +94,6 @@ vector<string>dic_list;
 map<int,string>mean;//pos to mean
 map<int,string>word;//pos to word 
 bool had[300000][20];
-set<int>star;
 map<int,double>prof;
 void insert(string str,string m,int belong)
 {
@@ -129,11 +128,6 @@ int find(string str)
 void save()
 {
 	ofstream fout("info.txt");
-	fout<<star.size()<<endl;
-	for(set<int>::iterator it=star.begin();it!=star.end();it++)
-	{
-		fout<<word[*it]<<endl;
-	}
 	fout<<prof.size()<<endl;
 	for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++)
 	{
@@ -171,7 +165,7 @@ void bfs(int x)
 		{
 			tot.push_back(x);
 			gotoxy(0,tot.size());
-			if(star.find(x)!=star.end()) SetColor(0,4);
+			if(prof.find(x)!=prof.end()) SetColor(0,4);
 			out(x);
 			SetColor(0,7);
 			if(tot.size()>=(unsigned int)Pre) return;
@@ -190,7 +184,7 @@ void dfs(int x)
 	{
 		tot.push_back(x);
 		gotoxy(0,tot.size());
-		if(star.find(x)!=star.end()) SetColor(0,4);
+		if(prof.find(x)!=prof.end()) SetColor(0,4);
 		out(x);
 		SetColor(0,7);
 	}
@@ -232,9 +226,9 @@ void detail(int x)
 		if(ch=='\t') return;
 		if(ch=='\r')
 		{
-			if(star.find(tot[line])==star.end())
+			if(prof.find(tot[line])==prof.end())
 			{
-				star.insert(tot[line]);
+				prof[tot[line]]=1;
 				gotoxy(0,line+1);
 				SetColor(7,4);
 				out(tot[line]);
@@ -242,13 +236,11 @@ void detail(int x)
 			}
 			else
 			{
-				star.erase(tot[line]);
+				prof.erase(tot[line]);
 				gotoxy(0,line+1);
 				SetColor(7,0);
 				out(tot[line]);
 			}
-			//add to prof
-			if(prof.find(tot[line])==prof.end()) prof[tot[line]]=1;
 			save();
 		}
 		if(ch=='w')
@@ -267,13 +259,13 @@ void detail(int x)
 			putchar('\n');
 			for(unsigned int i=0;i<tot.size();i++)
 			{
-				if(star.find(tot[i])!=star.end()) SetColor(0,4);
+				if(prof.find(tot[i])!=prof.end()) SetColor(0,4);
 				else SetColor(0,7);
 				out(tot[i]);
 				putchar('\n');
 			}
 			gotoxy(0,line+1);
-			if(star.find(tot[line])!=star.end()) SetColor(7,4);
+			if(prof.find(tot[line])!=prof.end()) SetColor(7,4);
 			else SetColor(7,0);
 			out(tot[line]);
 			//out mean
@@ -305,23 +297,10 @@ void read_info()
 	double dt;
 	string str;
 	fin>>sze;
-	for(int i=0;i<sze;i++)
-	{
-		fin>>str;
-		pos=find(str);
-		if(pos==-1)
-		{
-			cout<<"read error:"<<str<<" is not existed"<<endl;
-			continue;
-		}
-		star.insert(pos);
-	}
-	fin>>sze;
 	cout<<"size="<<sze<<endl;
 	for(int i=0;i<sze;i++)
 	{
 		fin>>str;
-//		cout<<str<<endl;
 		fin>>dt;
 		pos=find(str);
 		if(pos==-1)
@@ -655,7 +634,7 @@ int main()
 	init();
 	cout<<"读入了"<<n<<"个单词，耗时"<<clock()/1000.0<<"s"<<endl;
 	cout<<"cnt="<<cnt<<endl;
-	cout<<"读取个人数据："<<endl<<"收藏了"<<star.size()<<"个单词"<<endl<<"生词本中有"<<prof.size()<<"个单词"<<endl; 
+	cout<<"读取个人数据："<<endl<<"生词本中有"<<prof.size()<<"个单词"<<endl; 
 	Sleep(1500);
 	system("cls");
 	int pos=0;
