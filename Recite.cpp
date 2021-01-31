@@ -438,7 +438,7 @@ void web_translation()
 vector<int>rand_list;
 bool P(double x)
 {
-	return (rand()%10000)/10000.0<=pow(2,-x/50)*0.9+0.1;
+	return (rand()*(LL)rand()%10000)/10000.0<=pow(2,-x/50)*0.9+0.1;
 }
 int rand_pos()
 {
@@ -455,6 +455,12 @@ void practice()
 {
 	system("cls");
 	SetColor(0,7);
+	if(prof.size()==0)
+	{
+		cout<<"生词本中没有单词！"<<endl;
+		system("pause");
+		return;
+	}
 	char ch;
 	rand_list.clear();for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++) rand_list.push_back(it->first);
 	system("title \"Recite:practice 0->back|Enter->continue|1->Random one word|2->Random ten words!\"");
@@ -465,6 +471,12 @@ void practice()
 	cout<<"如果生词太少或者是熟练度都较高，则会建议您来点新鲜词汇！"<<endl<<endl; 
 	cout<<"Good luck to you!"<<endl<<endl;
 	system("pause");
+	double avg;
+	for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++) avg+=it->second;
+	avg/=prof.size();
+	stringstream ss;
+	ss<<avg;
+	system(("title "+ss.str()).c_str());
 	unsigned int rd;
 	string str;
 	int choose[4];
@@ -481,7 +493,7 @@ void practice()
 		if(i>100)
 		{
 			rd=rand()*rand()%rand_list.size();
-			cout<<"这些单词好像都很熟练了啊！要不要来点新词？"<<endl;
+			cout<<"单词本内的单词都很熟练了"<<endl;
 		}
 		if(P(prof[rand_list[rd]]))//choose
 		{
@@ -504,9 +516,13 @@ void practice()
 			bool flag=0;
 			for(unsigned int i=0;i<str.size();i++)
 			{
-				if(str[0]<='Z'&&str[0]>='A'&&str[0]-'A'<=3)
+				if(str[i]<='4'&&str[i]>='1')
 				{
-					if(choose[str[0]-'A']==rand_list[rd])
+					str[i]+='A'-'1';
+				}
+				if(str[i]<='Z'&&str[i]>='A'&&str[i]-'A'<=3)
+				{
+					if(choose[str[i]-'A']==rand_list[rd])
 					{
 						cout<<"Right!"<<endl;
 						flag=1;
@@ -514,7 +530,7 @@ void practice()
 					}
 					else
 					{
-						cout<<"Wrong!The answer is "<<mean[rand_list[rd]]<<endl;
+						cout<<"Wrong!The answer is "<<word[rand_list[rd]]<<mean[rand_list[rd]]<<endl;
 						prof[rand_list[rd]]*=0.4;
 						flag=1;
 					}
@@ -548,6 +564,12 @@ void practice()
 		int t;
 		Sleep(500);
 		cout<<"按回车继续练习\n按0或ESC返回查词页面\nTab键显示您的练习情况\n";
+		double avg;
+		for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++) avg+=it->second;
+		avg/=prof.size();
+		stringstream ss;
+		ss<<avg;
+		system(("title "+ss.str()).c_str());
 		while(1)
 		{
 			while(!kbhit()) Sleep(50);
@@ -566,6 +588,13 @@ void practice()
 				cout<<mean[t]<<endl; 
 				rand_list.clear();for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++) rand_list.push_back(it->first);
 				save();
+				
+				double avg;
+				for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++) avg+=it->second;
+				avg/=prof.size();
+				stringstream ss;
+				ss<<avg;
+				system(("title "+ss.str()).c_str());
 			}
 			if(ch=='2')
 			{
@@ -573,6 +602,13 @@ void practice()
 				for(int i=0;i<10;i++) prof[t=rand_pos()]+=1,out(t),cout<<mean[t]<<endl;
 				rand_list.clear();for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++) rand_list.push_back(it->first);
 				save();
+				
+				double avg;
+				for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++) avg+=it->second;
+				avg/=prof.size();
+				stringstream ss;
+				ss<<avg;
+				system(("title "+ss.str()).c_str());
 			}
 			if(ch==-32)
 			{
@@ -580,14 +616,32 @@ void practice()
 				ch=getch();
 				if(ch==83)
 				{
-					cout<<"你确定要删除\""<<word[rd]<<"\"这个单词嘛?(Y/N)"<<endl;
+					cout<<"你确定要删除\""<<word[rand_list[rd]]<<"\"这个单词嘛?(Y/N)"<<endl;
 					if(judge())
 					{
-						prof.erase(rd);
+						prof.erase(rand_list[rd]);
 						rand_list.clear();for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++) rand_list.push_back(it->first);
 						cout<<"删除成功"<<endl; 
 					}
+					else
+					{
+						cout<<"取消删除"<<endl; 
+					}
 				}
+				
+				if(prof.size()==0)
+				{
+					cout<<"生词本中没有单词！"<<endl;
+					system("pause");
+					return;
+				}
+				
+				double avg;
+				for(map<int,double>::iterator it=prof.begin();it!=prof.end();it++) avg+=it->second;
+				avg/=prof.size();
+				stringstream ss;
+				ss<<avg;
+				system(("title "+ss.str()).c_str());
 			}
 		}
 		
