@@ -22,30 +22,32 @@
 
     <StackPanel>
         <TextBlock
-            FontSize="20"
-            FontWeight="Medium"
-            Text="Personalization" />
+                FontSize="20"
+                FontWeight="Medium"
+                Text="Personalization" />
         <TextBlock Margin="0,12,0,0" Text="Theme" />
         <RadioButton
-            Margin="0,12,0,0"
-            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-            CommandParameter="theme_light"
-            Content="Light"
-            GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
+                Margin="0,12,0,0"
+                Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
+                CommandParameter="theme_light"
+                Content="Light"
+                GroupName="themeSelect"
+                IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
         <RadioButton
-            Margin="0,8,0,0"
-            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-            CommandParameter="theme_dark"
-            Content="Dark"
-            GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
+                Margin="0,8,0,0"
+                Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
+                CommandParameter="theme_dark"
+                Content="Dark"
+                GroupName="themeSelect"
+                IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
 
         <TextBlock
-            Margin="0,24,0,0"
-            FontSize="20"
-            FontWeight="Medium"
-            Text="About Recite" />
-        <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+                Margin="0,24,0,0"
+                FontSize="20"
+                FontWeight="Medium"
+                Text="About Recite" />
+        <TextBlock Margin="0,12,0,0" Text="这里是About。这是个测试。" />
+        <Image Height="Auto" Width="Auto" Source="/Views/Pages/82a915debef6e3f1c123eef8a7829c70512592108.jpg"/>
+        <TextBlock TextWrapping="Wrap"><Run Language="zh-cn" Text="看不见我~12345，喵喵喵喵喵！"/></TextBlock>
     </StackPanel>
 </Page>
